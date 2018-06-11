@@ -4,7 +4,7 @@ services:
   - docker
 install:
   - docker version
-  - docker build -f Dockerfile -t bidcore/jhipster_ci:travis jhipster_ci/
+  - docker build -f Dockerfile -t bidcore/jhipster_ci:travis jhipster_ci
 script:
   - docker images
   - docker inspect bidcore/jhipster_ci:travis
