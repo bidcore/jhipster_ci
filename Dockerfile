@@ -6,19 +6,26 @@ FROM openjdk:8
 
 MAINTAINER Holger Berndt <hberndt@bidcore.de>
 
+ENV NODE_VERSION 8.11.2
+ENV ARCH=x64
+
 RUN \
   #install dependencies
   apt-get update && \
   apt-get install -y \
-    python \
-    g++ \
-    build-essential && \
-  # install latest Node.js and npm
-  # https://gist.github.com/isaacs/579814#file-node-and-npm-in-30-seconds-sh
-  mkdir ~/node-latest-install && cd $_ && \
-  curl http://nodejs.org/dist/node-latest.tar.gz | tar xz --strip-components=1 && \
-  make install && \
-  curl https://www.npmjs.org/install.sh | sh && \
+    python
+
+RUN \
+  # f = fail
+  # O = use remote file name
+  # L = redo if location changed
+  # s = silent
+  # S = show errors
+  curl -fsSLO --compressed "https://nodejs.org/dist/v${NODE_VERSION}/node-v${NODE_VERSION}-linux-${ARCH}.tar.xz" && \
+  tar -xJf "node-v${NODE_VERSION}-linux-${ARCH}.tar.xz" -C /usr/local --strip-components=1 --no-same-owner && \
+  rm "node-v${NODE_VERSION}-linux-${ARCH}.tar.xz" && \
+  ln -s /usr/local/bin/node /usr/local/bin/nodejs && \
+  curl -fsSLO https://www.npmjs.org/install.sh | sh && \
   # upgrade npm
   npm install -g npm && \
   # install bower gulp yarn
