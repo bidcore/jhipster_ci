@@ -25,7 +25,7 @@ RUN add-apt-repository \
 
 # update repository and install docker
 RUN apt-get update && \
-    apt-get install -y docker-ce=17.03.0~ce-0~debian-jessie
+    apt-get install -y docker-ce
 
 # copy the script to bin directory
 COPY docker-entrypoint.sh /usr/local/bin/
