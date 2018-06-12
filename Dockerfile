@@ -28,7 +28,7 @@ RUN apt-get update && \
     apt-get install -y docker-ce
 
 # copy the script to bin directory
-COPY docker-entrypoint.sh /usr/local/bin/
+COPY docker-entrypoint.sh /usr/bin/
 
 # set the entrypoint and end with shell
 ENTRYPOINT ["docker-entrypoint.sh"]
