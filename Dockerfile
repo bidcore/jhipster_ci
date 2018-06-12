@@ -13,8 +13,6 @@ RUN apt-get update && apt-get install -y \
          curl \
          gnupg2 \
          software-properties-common \
-
-
    # download Docker GPG Key and install it in APT
    && curl -fsSL https://download.docker.com/linux/debian/gpg | apt-key add - \
    # add the docker repository
@@ -25,10 +23,10 @@ RUN apt-get update && apt-get install -y \
    # update repository and install docker
    && apt-get update && \
       apt-get install -y docker-ce
-      
+
 # copy the script to bin directory
 COPY docker-entrypoint.sh /usr/bin/
 
 # set the entrypoint and end with shell
-ENTRYPOINT ["docker-entrypoint.sh"]
+ENTRYPOINT ["/usr/bin/docker-entrypoint.sh"]
 CMD ["sh"]
